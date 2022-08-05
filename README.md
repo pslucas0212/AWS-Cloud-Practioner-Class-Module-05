@@ -151,7 +151,22 @@ This means, if you are using complete objects or only occasional changes, S3 is 
 
 ### Amazon Elastic File System (Amazon EFS)
 
-EFS manage file system for shared data access
+EFS manage file system for shared data access or shared file system.  Multiple EC2 instances can access EFS and EFS scales up and down as need.
+
+EBS vs EFS  
+- ESB attaches to an EC2 instance
+- AZ level resource need to be in the same AZ - store files, database
+- Doesn't scale automatically. 
+
+EFS   
+- Multple instances reading and writing to it concurrently
+- True file system for Linux
+- Regional resource it can work across mutliple AZs
+- Automatically scales as needed
+- on-prem servers can access EFS via AWS Direct Connect. 
+
+
+
 
 ### Transcript
 Next up on the list of storage services is Amazon Elastic File System, or what we call EFS. EFS is a managed file system. It's extremely common for businesses to have shared file systems across their applications. For example, you might have multiple servers running analytics on large amounts of data being stored in a shared file system. This data traditionally has been hosted on premises. In this on-premises data center, you would have to ensure that the storage you have can keep up with the amount of data that you are storing. Make sure backups are taken, and that the data is stored redundantly as well as manage all of the servers hosting that data. 
