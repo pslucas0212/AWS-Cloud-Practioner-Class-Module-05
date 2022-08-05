@@ -63,6 +63,22 @@ Since the use case for EBS volumes is to have a hard drive that is persistent, t
 
 ### Amazon Simple Storage Services (S3)
 
+S3 is a datastore that allows you to store and retreive data as long as need.  The data is stores as objects in buckets instead of folders.  Max size is 5 TB and can version objects.   Create mutlipe buckets and control access to data. 
+
+Object storage consists of the data objects, metadata and a key.  Object storage changes the entire object when it changes where block storage only changes (overwrites) blocks that change.
+
+Tiers of S3
+- Amazon S3 standard high reliability of not losing data.  Data is stored in 3 AZs.  Useful for static web site storage by enabling bucket to host web content
+- S3 Standard Infrequent Access (S3  Standard -IA) is long term storage for infrequently accessed data like backup.  Data is stored in 3 AZs
+- S3 Intelligent-tiering Monitors objects' access patterns and automatically moves the object to the best S3 tier
+- S3 One Zone-infrequent Access (S3 One Zone-IA)
+- Amazon S3 Glacier is for data long term renteion..  Create locked volume policy such as write once read many (WORM)
+- S3 Glacier Deep Archive
+
+You can create S3 lifecycle polices that automaticall move data for you between S3 tiers.
+
+Also S3 AI One zone and S3 Glaicer Deep archive.
+
 #### Transcript
 Welcome to this video on Amazon Simple Storage Service, or S3. From the name, you've probably guessed that it is a storage service and it's, well, simple. Most businesses have data that needs to be stored somewhere. For the coffee shop, this could be receipts, images, Excel spreadsheets, employee training videos, and even text files, among others. Storing these files is where S3 comes in handy because it is a data store that allows you to store and retrieve an unlimited amount of data at any scale. 
 
@@ -86,4 +102,24 @@ Fact, I don't think we mentioned lifecycle policies up till this point. But they
 
 
 Just to note that there are other storage classes. Like S3 Infrequent Access One Zone and S3 Glacier Deep Archive that you can use. Happy storing.
+
+### Comparing Amazon EBS and Amazon S3
+
+#### Transcript
+AWS Cloud Practitioners, welcome to the clash of the storage class! In the block storage corner, weighing in at sizes up to 16 tebibytes each, with a unique ability to survive the termination of their Amazon EC2 instances, they are solid state, they are spinning platters, they are Amazon Elastic Block Storage! 
+
+
+In the regional object storage corner, weighing in at unlimited storage, with individual objects at 5,000 gigabytes in size, they specialize in write once/read many, they are 99 .999 999 999% durable, they are Amazon Simple Storage Service! 
+
+
+Head-to-head, each storage class boasts the best dynamically distributed design for different storage demands. Which storage class will ultimately be victorious in this thunderdome slugfest? To understand who wins, you need to clarify a use case. 
+
+
+Round one. Let's say you're running a photo analysis website where users upload a photo of themselves, and your application finds the animals that look just like them. You have potentially millions of animal pictures that all need to be indexed and possibly viewed by thousands of people at once. This is the perfect use case for S3. S3 is already web enabled. Every object already has a URL that you can control access rights to who can see or manage the image. It's regionally distributed, which means that it has 11 nines of durability, so no need to worry about backup strategies. S3 is your backup strategy. Plus the cost savings is substantial overrunning the same storage load on EBS. With the additional advantage of being serverless, no Amazon EC2 instances are needed. Sounds like S3 is the judge's winner here for this round. 
+
+
+But wait, round two, you have an 80-gigabyte video file that you're making edit corrections on. To know the best storage class here, we need to understand the difference between object storage and block storage. Object storage treats any file as a complete, discreet object. Now this is great for documents, and images, and video files that get uploaded and consumed as entire objects, but every time there's a change to the object, you must re-upload the entire file. There are no delta updates. Block storage breaks those files down to small component parts or blocks. This means, for that 80-gigabyte file, when you make an edit to one scene in the film and save that change, the engine only updates the blocks where those bits live. If you're making a bunch of micro edits, using EBS, elastic block storage, is the perfect use case. If you were using S3, every time you saved the changes, the system would have to upload all 80 gigabytes, the whole thing, every time. EBS clearly wins round two. 
+
+
+This means, if you are using complete objects or only occasional changes, S3 is victorious. If you are doing complex read, write, change functions, then, absolutely, EBS is your knockout winner. Your winner depends on your individual workload. Each service is the right service for specific needs. Once you understand what you need, you will know which service is your champion!
 
