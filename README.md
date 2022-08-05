@@ -105,6 +105,31 @@ Just to note that there are other storage classes. Like S3 Infrequent Access One
 
 ### Comparing Amazon EBS and Amazon S3
 
+EBS 
+- 16 TiB
+- Survive EC2 Instance termination
+- SSDsby default
+- HDD Option
+
+S3
+- unlimited storage
+- Maximum Option size5TB size
+- WORM
+- 99.9999999%
+
+
+Use Case 1 - Photo analysis website.  Customers upload pictures to determine animal
+- S3 is the best solution - Web enabled, Regonally distributred (no need to worry about backup strategy).
+- Less exapnesive then EBS, no EC2 instances needed
+
+Use Case 2 - 80 GB video that needs to be edited.
+- S3 great for documents and video files that are consumed as a complete ojbect.  When you change a doc, the whole doc is updated
+- EBS only updates blocks where bits are changed
+- EBS is best choice
+
+If you use complete objects with few changes, S3 is best.  If you do complex data updates then EBS is the best choice
+
+
 #### Transcript
 AWS Cloud Practitioners, welcome to the clash of the storage class! In the block storage corner, weighing in at sizes up to 16 tebibytes each, with a unique ability to survive the termination of their Amazon EC2 instances, they are solid state, they are spinning platters, they are Amazon Elastic Block Storage! 
 
@@ -122,4 +147,23 @@ But wait, round two, you have an 80-gigabyte video file that you're making edit 
 
 
 This means, if you are using complete objects or only occasional changes, S3 is victorious. If you are doing complex read, write, change functions, then, absolutely, EBS is your knockout winner. Your winner depends on your individual workload. Each service is the right service for specific needs. Once you understand what you need, you will know which service is your champion!
+
+
+### Amazon Elastic File System (Amazon EFS)
+
+### Transcript
+Next up on the list of storage services is Amazon Elastic File System, or what we call EFS. EFS is a managed file system. It's extremely common for businesses to have shared file systems across their applications. For example, you might have multiple servers running analytics on large amounts of data being stored in a shared file system. This data traditionally has been hosted on premises. In this on-premises data center, you would have to ensure that the storage you have can keep up with the amount of data that you are storing. Make sure backups are taken, and that the data is stored redundantly as well as manage all of the servers hosting that data. 
+
+
+Luckily with AWS, you don't need to worry about buying all of that hardware and keeping the whole file system running from an operational standpoint. With EFS, you can keep existing file systems in place but let AWS do all the heavy lifting of the scaling and the replication. EFS allows you to have multiple instances accessing the data in EFS at the same time. It scales up and down as needed without you needing to do anything to make that scaling happen. Super nice, right? Well, you might be thinking, Amazon EBS also lets me store files that I can access from EC2 instances. What exactly is the difference here?
+
+
+[Blaine] AWS Cloud Practitioners, welcome back!
+
+
+[Morgan] All right, we don't need to do all of that. The answer is really simple. Amazon EBS volumes attach to EC2 instances and are an Availability Zone-level resource. In order to attach EC2 to EBS, you need to be in the same AZ. You can save files on it. You can also run a database on top of it. Or store applications on it. It's a hard drive. If you provision a two terabyte EBS volume and fill it up, it doesn't automatically scale to give you more storage. So that's EBS. Amazon EFS can have multiple instances reading and writing from it at the same time.
+
+
+But it isn't just a blank hard drive that you can write to. It is a true file system for Linux. It is also a regional resource. Meaning any EC2 instance in the Region can write to the EFS file system. As you write more data to EFS, it automatically scales. No need to provision any more volumes.
+
 
