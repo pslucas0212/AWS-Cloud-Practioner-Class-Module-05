@@ -336,7 +336,15 @@ But it's more than just being able to handle massively larger data sets. Redshif
 
 I'm not gonna go into details of how the magic works. We have whole classes that you or your data teams can take that explain how it is built, and why it can return such improved results. The key for you is to understand that when you need big data BI solutions, Redshift allows you to get started with a single API call. Less time waiting for results, more time getting answers.
 
-### Amazon Database Migration Serivce
+### Amazon Database Migration Serivce - AWS DMS
+
+DMS help customers migrating exsitings database to AWS.  From exsiting data (source) to new database (target).  They can be same or different DBs
+
+- Homogenous migration - MySQL to MySQL on AWS. Oracle to Oracle on AWS.  Datbase can be a database on EC2 or Amazon RDBS
+- Heteroengous migration - diffetent source and target.  First conver with AWS Schema conversion tool and then use DMS to migrate data
+- DMS can be used for devevelpment and test migration.  Developers test against production data with out touch production data
+- Database consolidation - 
+- Continous replication - continouse data replication for DR or geo separation
 
 ### Transcript
 We've been talking about databases and the various database options on AWS. But what happens if you have a database that's on-premises or in the cloud already? Does that mean you have to start from scratch or does AWS have a magical way to help you migrate your existing database? 
@@ -366,3 +374,78 @@ Finally, continuous replication is when you use DMS to perform continuous data r
 
 
 If you'd like to learn more about any of these, please check out our resources section. And there you have it, folks, DMS in a nutshell.
+
+### Additional Database Services
+
+Important!  Choose the right database to fit your data and business purposes.
+
+- Amazon DocumentDB supports MongoDB Workloads- Full content mamagement system.  Catalogs, user profiles
+- Amazon Neptune - a graph database service.  Highly connected data sets.  Social web connections.  GOod for fraud detection
+- Amazon Quantum Ledger Database (QLDB) - 100% immutablility for supply chain or financial transactions.  Immutable ledge
+- Amazon Blockchain
+- Amazon ElsatiCache - Reddis and Memcached flavors - To improve performance add a caching layer
+- Amazon DynamoDB Accelerator (DAX) - cache service for DynamoDB
+
+#### Transcript
+Before we wrap up databases and storage, I wanna loop back to the topic that we started all this with. Choosing the right database, choosing the right storage platform to fit your business needs, rather than forcing your data to fit your database's requirements. No matter what a database vendor might try to tell you, there is no one-size-fits-all database for all purposes. We've covered quite a few database flavors already, but there are even more databases AWS offers for special business requirements, that we don't have time to cover. But its worth just knowing they are there in case you need them. 
+
+
+For example, we talked about DynamoDB, and that's great for key-value pair databases. But what if you need more than just small attributes? What if you need a full content management system? Introducing Amazon DocumentDB, Great for content management, catalogs, user profiles. 
+
+
+What if you add a social network that you wanted to track for those kind of social webs, who is connected to who, is very clunky to manage in a traditional relational database so Amazon Neptune: a graph database, engineered for social networking and recommendation engines, also great for fraud detection needs. 
+
+
+Or perhaps you have a supply chain, that you have to track with assurances that nothing is lost. Or you have banking or financial records that require 100% immutability, or some people will tell you, oh, that's what blockchain is all about. Well, perhaps, I mean now, If you do need a blockchain solution, wouldn't you know it? We offer Amazon Managed Blockchain. But that's probably not what you really need here. It solves part of the equation, but adds a huge decentralization component, that's not what financial regulators wanna see. What you really need is an immutable ledger, so Amazon QLDB, or Quantum Ledger Database. An immutable system of record where any entry can never be removed from the audits. 
+
+
+Databases by themselves are great but if there is a way to make them faster, wouldn't that be greater? But you know I wouldn't be saying that, if there weren't some accelerator options that can be used in a number of unique scenarios. Starting with adding caching layers on top of your databases that can help improve read times of common requests from milliseconds to microseconds Amazon ElastiCache can provide those caching layers without your team needing to worry about the heavy lifting of launching, uplift, and maintenance. And it comes in both Memcached and Redis flavors. 
+
+
+Or if you are using DynamoDB, try using DAX, the DynamoDB Accelerator, a native caching layer designed to dramatically improve read times for your nonrelational data. 
+
+
+The key thing to understand is, AWS wants to make sure that you using the best tool for the job.
+
+### Module Review
+
+- EBS attached to EC2
+- S3 object storage
+- Databases
+- DyanmoDB
+- EFS file sotrage
+- Amazon Redsift
+- Amazon DMS - data migration service
+- DocumentDB
+- Nepture
+- Amazone block chaine
+- Amazon Ledger
+
+
+#### Transcript
+Another module completed. Awesome stuff. You learned about all the different types of AWS storage mechanisms. Let's recap them, shall we? 
+
+The first one we learned about is Elastic Block Store volumes, and you attach those to EC2 instances so you have local storage that is not ephemeral. 
+
+You learned about how S3 and how you can store objects in AWS with the click of a button or call of an API. 
+
+We even discussed the various relational database options available on AWS. Or for the workloads that just need a key-value pair, we have the non-relational offering called DynamoDB. 
+
+
+Next up was EFS for file storage use cases. 
+
+
+We then have Amazon Redshift for all our data warehouse needs. 
+
+
+And to aid in migration of existing databases, we have DMS or Database Migration Service. 
+
+
+We also touched upon the lesser known storage services, like DocumentDB, Neptune, QLDB, and Amazon Managed Blockchain. 
+
+
+Lastly, we talked about how caching solutions like ElastiCache and DynamoDB Accelerator can be used. 
+
+
+That's a lot of places to store different types of data, and hopefully you've learned the correct place to store each type.
+
